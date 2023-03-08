@@ -9,7 +9,7 @@ import com.theandroidfactory.senya.databinding.ItemAttractionBinding
 
 class AttractionsAdapter(val attractions: List<Attraction>, val listener: OnClickListener): RecyclerView.Adapter<AttractionsAdapter.ViewHolder>() {
     interface OnClickListener {
-        fun onClick(position: Int)
+        fun onClick(id: String)
     }
 
     inner class ViewHolder(val binding: ItemAttractionBinding): RecyclerView.ViewHolder(binding.root) {
@@ -18,7 +18,7 @@ class AttractionsAdapter(val attractions: List<Attraction>, val listener: OnClic
             binding.monthsToVisit.text = attraction.months_to_visit
             Picasso.get().load(attraction.image_urls[0]).into(binding.header)
             binding.root.setOnClickListener {
-                listener.onClick(adapterPosition)
+                listener.onClick(attraction.id)
             }
         }
     }

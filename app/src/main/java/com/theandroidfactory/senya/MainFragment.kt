@@ -25,7 +25,9 @@ class MainFragment: BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = AttractionsAdapter(attractions, object: AttractionsAdapter.OnClickListener {
-            override fun onClick(position: Int) {
+            override fun onClick(id: String) {
+                val navDirections = MainFragmentDirections.actionMainFragmentToDetailFragment(id)
+                navController.navigate(navDirections)
             }
         })
         binding.recycler.adapter = adapter
