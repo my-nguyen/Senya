@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -12,6 +15,7 @@ import com.theandroidfactory.senya.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
     val attractions: List<Attraction> by lazy {
         parseAttractions()
     }
@@ -23,7 +27,16 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+
+        // set up the back button
+        // reference: https://developer.android.com/guide/navigation/navigation-ui?hl=en
+        appBarConfiguration = AppBarConfiguration(navController.graph)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
+
+    // activate the back button
+    // reference: https://developer.android.com/guide/navigation/navigation-ui?hl=en
+    override fun onSupportNavigateUp() = navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
 
     private fun parseAttractions(): List<Attraction> {
         val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()

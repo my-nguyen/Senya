@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.theandroidfactory.senya.MainFragment"
-        android:label="MainFragment"
+        android:label="Main Page"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_detailFragment"
@@ -23,7 +23,7 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.theandroidfactory.senya.DetailFragment"
-        android:label="DetailFragment"
+        android:label="Attraction"
         tools:layout="@layout/fragment_detail">
         <argument
             android:name="id"
