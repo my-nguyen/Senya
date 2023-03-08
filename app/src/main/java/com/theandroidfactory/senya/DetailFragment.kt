@@ -64,14 +64,7 @@ class DetailFragment : BaseFragment() {
                 return when (menuItem.itemId) {
                     R.id.menu_location -> {
                         val attraction = viewModel.selectedAttractionLive.value ?: return true
-
-                        // reference: https://developers.google.com/maps/documentation/urls/android-intents#kotlin_2
-                        // Creates an Intent that will load a map of San Francisco
-                        val uri =
-                            Uri.parse("geo:${attraction.location.latitude},${attraction.location.longitude}?z=9&q=${attraction.title}")
-                        val mapIntent = Intent(Intent.ACTION_VIEW, uri)
-                        mapIntent.setPackage("com.google.android.apps.maps")
-                        startActivity(mapIntent)
+                        viewModel.selectedLocationLive.postValue(attraction)
                         true
                     }
                     else -> false

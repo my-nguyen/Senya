@@ -8,6 +8,7 @@ class MyViewModel: ViewModel() {
     private val repository = Repository()
     val attractionsLive = MutableLiveData<List<Attraction>>()
     val selectedAttractionLive = MutableLiveData<Attraction>()
+    val selectedLocationLive = MutableLiveData<Attraction>()
 
     fun init(context: Context) = attractionsLive.postValue(repository.parseAttractions(context))
 

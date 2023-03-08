@@ -1,5 +1,7 @@
 package com.theandroidfactory.senya
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +31,15 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         viewModel.init(this)
+        viewModel.selectedLocationLive.observe(this) { attraction ->
+            // reference: https://developers.google.com/maps/documentation/urls/android-intents#kotlin_2
+            // Creates an Intent that will load a map from attraction.location
+            val uri =
+                Uri.parse("geo:${attraction.location.latitude},${attraction.location.longitude}?z=9&q=${attraction.title}")
+            val mapIntent = Intent(Intent.ACTION_VIEW, uri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            startActivity(mapIntent)
+        }
     }
 
     // activate the back button
