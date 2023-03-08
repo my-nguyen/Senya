@@ -2,6 +2,7 @@ package com.theandroidfactory.senya
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     val attractions: List<Attraction> by lazy {
         parseAttractions()
     }
+    val viewModel: MyViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
