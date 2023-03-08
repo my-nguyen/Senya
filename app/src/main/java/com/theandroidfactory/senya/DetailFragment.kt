@@ -1,10 +1,10 @@
 package com.theandroidfactory.senya
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import android.view.*
+import androidx.core.view.MenuProvider
 import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
 import com.theandroidfactory.senya.databinding.FragmentDetailBinding
@@ -36,5 +36,26 @@ class DetailFragment: BaseFragment() {
         binding.facts.setOnClickListener {
 
         }
+
+        requireActivity().addMenuProvider(object: MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_detail, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.menu_location -> {
+                        // reference: https://developers.google.com/maps/documentation/urls/android-intents#kotlin_2
+                        // Creates an Intent that will load a map of San Francisco
+                        val uri = Uri.parse("geo:${attraction.location.latitude},${attraction.location.longitude}?z=9&q=${attraction.title}")
+                        val mapIntent = Intent(Intent.ACTION_VIEW, uri)
+                        mapIntent.setPackage("com.google.android.apps.maps")
+                        startActivity(mapIntent)
+                        true
+                    }
+                    else -> false
+                }
+            }
+        })
     }
 }
