@@ -6,9 +6,16 @@ import androidx.lifecycle.ViewModel
 
 class MyViewModel: ViewModel() {
     private val repository = Repository()
-    val attractionsLiveData = MutableLiveData<List<Attraction>>()
+    val attractionsLive = MutableLiveData<List<Attraction>>()
+    val selectedAttractionLive = MutableLiveData<Attraction>()
 
-    fun init(context: Context) {
-        attractionsLiveData.postValue(repository.parseAttractions(context))
+    fun init(context: Context) = attractionsLive.postValue(repository.parseAttractions(context))
+
+    fun onAttractionSelected(id: String) {
+        val attraction = attractionsLive.value?.find { attraction ->
+            attraction.id == id
+        } ?: return
+
+        selectedAttractionLive.postValue(attraction)
     }
 }

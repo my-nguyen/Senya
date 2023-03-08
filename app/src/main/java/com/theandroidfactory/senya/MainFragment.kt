@@ -24,13 +24,11 @@ class MainFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.attractionsLiveData.observe(viewLifecycleOwner) { attractions ->
-            val adapter =
-                AttractionsAdapter(attractions, object : AttractionsAdapter.OnClickListener {
+        viewModel.attractionsLive.observe(viewLifecycleOwner) { attractions ->
+            val adapter = AttractionsAdapter(attractions, object : AttractionsAdapter.OnClickListener {
                     override fun onClick(id: String) {
-                        val navDirections =
-                            MainFragmentDirections.actionMainFragmentToDetailFragment(id)
-                        navController.navigate(navDirections)
+                        navController.navigate(R.id.action_mainFragment_to_detailFragment)
+                        viewModel.onAttractionSelected(id)
                     }
                 })
             binding.recycler.adapter = adapter
