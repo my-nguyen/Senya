@@ -17,9 +17,6 @@ import com.theandroidfactory.senya.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
-    val attractions: List<Attraction> by lazy {
-        parseAttractions()
-    }
     val viewModel: MyViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,11 +36,4 @@ class MainActivity : AppCompatActivity() {
     // activate the back button
     // reference: https://developer.android.com/guide/navigation/navigation-ui?hl=en
     override fun onSupportNavigateUp() = navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-
-    private fun parseAttractions(): List<Attraction> {
-        val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
-        val adapter = moshi.adapter(Attractions::class.java)
-        val text = resources.openRawResource(R.raw.croatia).bufferedReader().use { it.readText() }
-        return adapter.fromJson(text)!!.attractions
-    }
 }
