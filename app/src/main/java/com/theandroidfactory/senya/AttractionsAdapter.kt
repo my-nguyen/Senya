@@ -15,7 +15,7 @@ class AttractionsAdapter(val attractions: List<Attraction>, val listener: OnClic
     inner class ViewHolder(val binding: ItemAttractionBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(attraction: Attraction) {
             binding.title.text = attraction.title
-            binding.months.text = attraction.months_to_visit
+            binding.monthsToVisit.text = attraction.months_to_visit
             Picasso.get().load(attraction.image_urls[0]).into(binding.header)
             binding.root.setOnClickListener {
                 listener.onClick(adapterPosition)

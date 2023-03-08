@@ -22,10 +22,8 @@ class MainFragment: BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val attractions = emptyList<Attraction>()
         val adapter = AttractionsAdapter(attractions, object: AttractionsAdapter.OnClickListener {
             override fun onClick(position: Int) {
-                TODO("Not yet implemented")
             }
         })
         binding.recycler.adapter = adapter

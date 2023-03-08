@@ -1,5 +1,7 @@
 package com.theandroidfactory.senya
 
+data class Attractions(val attractions: List<Attraction> = listOf())
+
 data class Attraction(
     val description: String = "",
     val facts: List<String> = listOf(),
