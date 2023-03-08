@@ -13,9 +13,10 @@ import com.theandroidfactory.senya.databinding.FragmentDetailBinding
 class DetailFragment : BaseFragment() {
     lateinit var binding: FragmentDetailBinding
     private val safeArgs: DetailFragmentArgs by navArgs()
-    private val attraction: Attraction by lazy {
-        attractions.find { it.id == safeArgs.id }!!
-    }
+//    private val attraction: Attraction by lazy {
+//        attractions.find { it.id == safeArgs.id }!!
+//    }
+    private val attraction = Attraction()
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -6,6 +6,6 @@ abstract class BaseFragment : Fragment() {
     val navController by lazy {
         (activity as MainActivity).navController
     }
-    val attractions: List<Attraction>
-        get() = (activity as MainActivity).attractions
+    val viewModel: MyViewModel
+        get() = (activity as MainActivity).viewModel
 }

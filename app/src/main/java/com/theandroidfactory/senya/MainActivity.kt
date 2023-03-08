@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity() {
         // reference: https://developer.android.com/guide/navigation/navigation-ui?hl=en
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
+
+        viewModel.init(this)
     }
 
     // activate the back button
