@@ -25,6 +25,7 @@
         android:name="com.theandroidfactory.senya.DetailFragment"
         android:label="Attraction"
         tools:layout="@layout/fragment_detail">
+        <deepLink app:uri="https://senya.travel.com/attraction/{id}" />
         <argument
             android:name="id"
             app:argType="string" />
