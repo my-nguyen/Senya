@@ -8,22 +8,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import com.theandroidfactory.senya.databinding.FragmentDetailBinding
 
-class DetailFragment : BaseFragment() {
-    lateinit var binding: FragmentDetailBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentDetailBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+class DetailFragment : BaseFragment(R.layout.fragment_detail) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.selectedAttractionLive.observe(viewLifecycleOwner) { attraction ->
+            val binding = FragmentDetailBinding.bind(view)
             binding.title.text = attraction.title
             binding.headerRecycler.setControllerAndBuildModels(
                 HeaderController(attraction.image_urls))
