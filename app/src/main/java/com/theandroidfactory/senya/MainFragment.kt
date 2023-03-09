@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
 import com.theandroidfactory.senya.databinding.FragmentMainBinding
 
 class MainFragment : BaseFragment() {
@@ -19,19 +17,19 @@ class MainFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = AttractionsAdapter(object : AttractionsAdapter.OnClickListener {
+        val controller = AttractionsController(object : AttractionsController.OnClickListener {
             override fun onClick(id: String) {
                 navController.navigate(R.id.action_mainFragment_to_detailFragment)
                 viewModel.onAttractionSelected(id)
             }
         })
-        binding.recycler.setController(adapter)
+        binding.recycler.setController(controller)
         // binding.recycler.addItemDecoration(DividerItemDecoration(requireActivity(), RecyclerView.VERTICAL))
 
         // uncomment to simulate loading with a progress bar
         // adapter.isLoading = true
         viewModel.attractionsLive.observe(viewLifecycleOwner) { attractions ->
-            adapter.attractions = attractions
+            controller.attractions = attractions
         }
     }
 }

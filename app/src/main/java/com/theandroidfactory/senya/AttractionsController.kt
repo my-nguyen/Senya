@@ -2,10 +2,10 @@ package com.theandroidfactory.senya
 
 import com.airbnb.epoxy.EpoxyController
 import com.squareup.picasso.Picasso
-import com.theandroidfactory.senya.databinding.HeaderBinding
+import com.theandroidfactory.senya.databinding.HeaderTextBinding
 import com.theandroidfactory.senya.databinding.ItemAttractionBinding
 
-class AttractionsAdapter(val listener: OnClickListener): EpoxyController() {
+class AttractionsController(val listener: OnClickListener): EpoxyController() {
     var isLoading: Boolean = false
         set(value) {
             field = value
@@ -29,16 +29,16 @@ class AttractionsAdapter(val listener: OnClickListener): EpoxyController() {
         override fun ItemAttractionBinding.bind() {
             title.text = attraction.title
             monthsToVisit.text = attraction.months_to_visit
-            Picasso.get().load(attraction.image_urls[0]).into(header)
+            Picasso.get().load(attraction.image_urls[0]).into(image)
             root.setOnClickListener {
                 listener.onClick(attraction.id)
             }
         }
     }
 
-    data class HeaderModel(val text: String): ViewBindingKotlinModel<HeaderBinding>(R.layout.header) {
-        override fun HeaderBinding.bind() {
-            header.text = text
+    data class HeaderModel(val string: String): ViewBindingKotlinModel<HeaderTextBinding>(R.layout.header_text) {
+        override fun HeaderTextBinding.bind() {
+            text.text = string
         }
     }
 

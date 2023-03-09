@@ -55,6 +55,7 @@ dependencies {
     def epoxyVersion = "5.1.1"
     implementation "com.airbnb.android:epoxy:$epoxyVersion"
     kapt "com.airbnb.android:epoxy-processor:$epoxyVersion"
+    implementation "ru.tinkoff.scrollingpagerindicator:scrollingpagerindicator:1.2.4"
 }
 
 kapt {

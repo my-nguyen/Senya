@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
 import androidx.core.view.MenuProvider
+import androidx.recyclerview.widget.LinearSnapHelper
 import com.squareup.picasso.Picasso
 import com.theandroidfactory.senya.databinding.FragmentDetailBinding
 
@@ -26,7 +27,11 @@ class DetailFragment : BaseFragment() {
             binding.title.text = attraction.title
             binding.description.text = attraction.description
             binding.monthsToVisit.text = attraction.months_to_visit
-            Picasso.get().load(attraction.image_urls[0]).into(binding.header)
+            binding.headerRecycler.setControllerAndBuildModels(
+                HeaderController(attraction.image_urls))
+            LinearSnapHelper().attachToRecyclerView(binding.headerRecycler)
+            binding.indicator.attachToRecyclerView(binding.headerRecycler)
+
             binding.facts.text = "${attraction.facts.size} facts"
             binding.facts.setOnClickListener {
                 val builder = StringBuilder()
