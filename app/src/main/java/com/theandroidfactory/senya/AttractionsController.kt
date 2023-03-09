@@ -2,8 +2,8 @@ package com.theandroidfactory.senya
 
 import com.airbnb.epoxy.EpoxyController
 import com.squareup.picasso.Picasso
-import com.theandroidfactory.senya.databinding.HeaderTextBinding
 import com.theandroidfactory.senya.databinding.ItemAttractionBinding
+import com.theandroidfactory.senya.databinding.ModelHeaderTextBinding
 
 class AttractionsController(val listener: OnClickListener): EpoxyController() {
     var isLoading: Boolean = false
@@ -36,8 +36,9 @@ class AttractionsController(val listener: OnClickListener): EpoxyController() {
         }
     }
 
-    data class HeaderModel(val string: String): ViewBindingKotlinModel<HeaderTextBinding>(R.layout.header_text) {
-        override fun HeaderTextBinding.bind() {
+    data class HeaderModel(val string: String) :
+        ViewBindingKotlinModel<ModelHeaderTextBinding>(R.layout.model_header_text) {
+        override fun ModelHeaderTextBinding.bind() {
             text.text = string
         }
     }
