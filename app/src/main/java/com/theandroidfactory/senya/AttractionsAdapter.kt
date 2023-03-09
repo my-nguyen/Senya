@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.theandroidfactory.senya.Attraction
+import com.theandroidfactory.senya.R
+import com.theandroidfactory.senya.ViewBindingKotlinModel
 import com.theandroidfactory.senya.databinding.ItemAttractionBinding
 
 class AttractionsAdapter(val attractions: List<Attraction>, val listener: OnClickListener): RecyclerView.Adapter<AttractionsAdapter.ViewHolder>() {
@@ -19,6 +21,19 @@ class AttractionsAdapter(val attractions: List<Attraction>, val listener: OnClic
             Picasso.get().load(attraction.image_urls[0]).into(binding.header)
             binding.root.setOnClickListener {
                 listener.onClick(attraction.id)
+            }
+        }
+    }
+
+    data class EpoxyModel(val attraction: Attraction, val onClick: (String) -> Unit):
+        ViewBindingKotlinModel<ItemAttractionBinding>(R.layout.item_attraction) {
+        override fun ItemAttractionBinding.bind() {
+            title.text = attraction.title
+            monthsToVisit.text = attraction.months_to_visit
+            Picasso.get().load(attraction.image_urls[0]).into(header)
+            root.setOnClickListener {
+                // listener.onClick(attraction.id)
+                onClick(attraction.id)
             }
         }
     }
