@@ -2,6 +2,7 @@ package com.theandroidfactory.senya
 
 import com.airbnb.epoxy.EpoxyController
 import com.squareup.picasso.Picasso
+import com.theandroidfactory.senya.databinding.HeaderBinding
 import com.theandroidfactory.senya.databinding.ItemAttractionBinding
 
 class AttractionsAdapter(val listener: OnClickListener): EpoxyController() {
@@ -23,7 +24,7 @@ class AttractionsAdapter(val listener: OnClickListener): EpoxyController() {
         fun onClick(id: String)
     }
 
-    inner class EpoxyModel(val attraction: Attraction):
+    inner class AttractionModel(val attraction: Attraction):
         ViewBindingKotlinModel<ItemAttractionBinding>(R.layout.item_attraction) {
         override fun ItemAttractionBinding.bind() {
             title.text = attraction.title
@@ -32,6 +33,12 @@ class AttractionsAdapter(val listener: OnClickListener): EpoxyController() {
             root.setOnClickListener {
                 listener.onClick(attraction.id)
             }
+        }
+    }
+
+    data class HeaderModel(val text: String): ViewBindingKotlinModel<HeaderBinding>(R.layout.header) {
+        override fun HeaderBinding.bind() {
+            header.text = text
         }
     }
 
@@ -44,8 +51,16 @@ class AttractionsAdapter(val listener: OnClickListener): EpoxyController() {
             // todo show empty state
             return
         }
+
+        HeaderModel("Recently Viewed").id("group_1").addTo(this)
+        val group1 = attractions.filter { it.title.startsWith("S") || it.title.startsWith("D") }
+        group1.forEach { attraction ->
+            AttractionModel(attraction).id(attraction.id).addTo(this)
+        }
+
+        HeaderModel("All Attractions").id("group_2").addTo(this)
         attractions.forEach { attraction ->
-            EpoxyModel(attraction).id(attraction.id).addTo(this)
+            AttractionModel(attraction).id(attraction.id).addTo(this)
         }
     }
 }

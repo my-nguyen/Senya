@@ -26,7 +26,7 @@ class MainFragment : BaseFragment() {
             }
         })
         binding.recycler.setController(adapter)
-        binding.recycler.addItemDecoration(DividerItemDecoration(requireActivity(), RecyclerView.VERTICAL))
+        // binding.recycler.addItemDecoration(DividerItemDecoration(requireActivity(), RecyclerView.VERTICAL))
 
         // uncomment to simulate loading with a progress bar
         // adapter.isLoading = true
